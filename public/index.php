@@ -8,10 +8,12 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
+use \Slim\App as App;
+
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
-$app = new \Slim\App(['settings' => $config]);
+$app = new App(['settings' => $config]);
 
 $app->get('/', function (Request $request, Response $response) {
     $log = new Logger('tek-on-quiz');
