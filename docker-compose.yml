@@ -1,0 +1,32 @@
+version: '2.1'
+services:
+  mysql:
+    container_name: quiz_mysql
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: quiz
+      MYSQL_USER: quiz
+      MYSQL_PASSWORD: dNgaGSygxdsrcCeRZ
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    ports:
+      - "33306:3306"
+  app:
+    container_name: quiz_app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    build: .
+    ports:
+      - "8089:80"
+    volumes:
+      - ./:/app
+    environment:
+      SQLALCHEMY_DATABASE_URI: 'mysql://assembly:dNgaGSygxdsrcCeRZ@mysql/assembly'
+    command: /run.sh
+
+
