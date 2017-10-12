@@ -8,3 +8,4 @@ RUN composer install --no-scripts --no-autoloader
 ADD quiz.conf /etc/apache2/sites-available/quiz.conf
 RUN a2ensite quiz
 
+COPY ./ /app/
