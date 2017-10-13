@@ -22,12 +22,7 @@ shell:
 tail-logs:
 	docker logs -f quiz_app
 
-test: unit functional
-
-unit:
-	docker exec quiz_app vendor/bin/phpunit
-
-functional:
+test:
 	docker exec quiz_app vendor/bin/codecept run
 
 .PHONY: rebuild kill exec rebuild-app tail-logs tests
