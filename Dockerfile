@@ -1,8 +1,8 @@
 FROM zaargy/mvf-apache-php7.1
 
-WORKDIR /app
-ADD composer.json /app/composer.json
-ADD composer.lock /app/composer.lock
-RUN composer install --no-scripts
+COPY composer.json /app
+COPY composer.lock /app
 
 ADD . /app
+
+RUN composer install
