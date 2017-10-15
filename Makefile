@@ -1,4 +1,4 @@
-all: test
+all: rebuild
 
 rebuild:
 	docker-compose down
