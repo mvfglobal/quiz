@@ -22,6 +22,9 @@ shell:
 tail-logs:
 	docker logs -f quiz_app
 
+style:
+	docker exec quiz_app vendor/bin/phpcs  --colors --standard=mvf-ruleset.xml -n -s
+
 test:
 	docker exec quiz_app vendor/bin/codecept run
 
