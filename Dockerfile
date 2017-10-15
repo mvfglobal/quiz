@@ -5,4 +5,6 @@ COPY composer.lock /app
 
 ADD . /app
 
+ADD scripts/bashrc /root/.bashrc
+
 RUN composer install
