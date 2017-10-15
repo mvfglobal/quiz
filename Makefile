@@ -22,10 +22,15 @@ shell:
 tail-logs:
 	docker logs -f quiz_app
 
+strip_triailing_whitespace:
+	docker exec quiz_app scripts/remove-trialing-whitespace.sh
+
 style:
 	docker exec quiz_app vendor/bin/phpcs  --colors --standard=mvf-ruleset.xml -n -s
 
 test:
 	docker exec quiz_app vendor/bin/codecept run
+
+precommit: strip_triailing_whitespace style test
 
 .PHONY: rebuild kill exec rebuild-app tail-logs tests
