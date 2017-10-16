@@ -1,0 +1,19 @@
+version: '2'
+services:
+  app:
+    container_name: quiz_app_prd
+    image: ${DOCKER_IMAGE}
+    ports:
+      - "80"
+    environment:
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+    command: /run.sh
+    labels:
+      traefik.frontend.rule: "${CONTAINER_HOSTS}"
+      traefik.backend.loadbalancer.method: "drr"
+      traefik.frontend.entryPoints: "http,https"
+    links:
+      - mysql:mysql
+      - mysql:db
